@@ -154,7 +154,7 @@ abstract class Tokenizer
      *   'type'    => 'T_FOO',     // the name of the token type
      *   'content' => 'Foo',       // the value of the token
      * );
-     * 
+     *
      * </code>
      */
     abstract protected function tokenize($string);
