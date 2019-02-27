@@ -196,7 +196,6 @@ abstract class Tokenizer
             T_NOWDOC                   => true,
             T_INLINE_HTML              => true,
         ];
-
         $this->numTokens = count($this->tokens);
         for ($i = 0; $i < $this->numTokens; $i++) {
             $this->tokens[$i]['line']   = $lineNumber;
