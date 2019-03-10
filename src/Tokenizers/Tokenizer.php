@@ -148,7 +148,7 @@ abstract class Tokenizer
      *
      * @return array
      */
-    protected function tokenize($string);
+    protected function tokenize($string)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             echo "\t*** START JS TOKENIZING ***".PHP_EOL;
