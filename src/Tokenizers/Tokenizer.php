@@ -335,11 +335,13 @@ abstract class Tokenizer
                         if (isset($chars[($i + $x)]) === false) {
                             break;
                         }
+    
                         $charBuffer .= $chars[($i + $x)];
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             $content = Util\Common::prepareForOutput($charBuffer);
                             echo "\t\t=> Looking ahead $x chars => $content".PHP_EOL;
                         }
+
                         if (isset($this->tokenValues[strtolower($charBuffer)]) === true) {
                             // We've found something larger that matches
                             // so we can ignore this char. Except for 1 very specific
@@ -358,25 +360,25 @@ abstract class Tokenizer
                                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                                     echo "\t\t* look ahead found more specific token ($newType), ignoring $i *".PHP_EOL;
                                 }
+
                                 $matchedToken = true;
                                 break;
                             }
                         }//end if
-
                     }//end for
-
                 }//end if
-
                 if ($matchedToken === false) {
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $lookAheadLength > 0) {
                         echo "\t\t* look ahead found nothing *".PHP_EOL;
                     }
+
                     $value = $this->tokenValues[strtolower($buffer)];
                     if ($value === 'T_FUNCTION' && $buffer !== 'function') {
                         // The function keyword needs to be all lowercase or else
                         // it is just a function called "Function".
                         $value = 'T_STRING';
                     }
+
                     $tokens[] = [
                         'code'    => constant($value),
                         'type'    => $value,
@@ -386,9 +388,9 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($buffer);
                         echo "\t=> Added token $value ($content)".PHP_EOL;
                     }
+    
                     $cleanBuffer = true;
                 }//end if
-
             } else if (isset($this->tokenValues[strtolower($char)]) === true) {
                 // No matter what token we end up using, we don't
                 // need the content in the buffer any more because we have
@@ -405,7 +407,7 @@ abstract class Tokenizer
                         echo "\t=> Added token T_STRING ($content)".PHP_EOL;
                     }
                 }
-    
+
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     echo "\t\t* char is token, looking ahead ".($maxTokenLength - 1).' chars *'.PHP_EOL;
                 }
@@ -419,11 +421,13 @@ abstract class Tokenizer
                     if (isset($chars[($i + $x)]) === false) {
                         break;
                     }
+    
                     $charBuffer .= $chars[($i + $x)];
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
                         $content = Util\Common::prepareForOutput($charBuffer);
                         echo "\t\t=> Looking ahead $x chars => $content".PHP_EOL;
                     }
+    
                     if (isset($this->tokenValues[strtolower($charBuffer)]) === true) {
                         // We've found something larger that matches
                         // so we can ignore this char.
@@ -431,6 +435,7 @@ abstract class Tokenizer
                             $type = $this->tokenValues[strtolower($charBuffer)];
                             echo "\t\t* look ahead found more specific token ($type), ignoring $i *".PHP_EOL;
                         }
+    
                         $matchedToken = true;
                         break;
                     }
