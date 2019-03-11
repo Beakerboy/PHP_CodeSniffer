@@ -279,7 +279,7 @@ class JS extends Tokenizer
      */
     public function tokenize($string)
     {
-        $tokens = parent::tokenize($string);
+        $tokens           = parent::tokenize($string);
         $commentTokenizer = new Comment();
 
         /*
