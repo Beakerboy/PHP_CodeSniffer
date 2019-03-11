@@ -405,9 +405,11 @@ abstract class Tokenizer
                         echo "\t=> Added token T_STRING ($content)".PHP_EOL;
                     }
                 }
+    
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     echo "\t\t* char is token, looking ahead ".($maxTokenLength - 1).' chars *'.PHP_EOL;
                 }
+
                 // The char is a token type, but we need to look ahead at the
                 // next chars to see if this is actually part of a larger token.
                 // For example, = and ===.
@@ -446,13 +448,12 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($char);
                         echo "\t=> Added token $value ($content)".PHP_EOL;
                     }
+
                     $cleanBuffer = true;
                 } else {
                     $buffer = $char;
                 }//end if
-
             }//end if
-
             // Keep track of content inside comments.
             if ($inComment === ''
                 && array_key_exists($buffer, $this->commentTokens) === true
@@ -467,7 +468,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($lastContent);
                         echo "\t=> Removed token $value ($content)".PHP_EOL;
                     }
-    
+
                     $lastChars    = str_split($lastContent);
                     $lastNumChars = count($lastChars);
                     for ($x = 0; $x < $lastNumChars; $x++) {
@@ -501,13 +502,13 @@ abstract class Tokenizer
                         $inComment = '';
                     }
                 }
-        
+
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     if ($inComment === '') {
                         echo "\t\t* found end of comment *".PHP_EOL;
                     }
                 }
-        
+
                 if ($inComment === '' && $cleanBuffer === false) {
                     $tokens[] = [
                         'code'    => T_STRING,
@@ -518,7 +519,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($buffer);
                         echo "\t=> Added token T_STRING ($content)".PHP_EOL;
                     }
-        
+
                     $buffer = '';
                 }
             }//end if
