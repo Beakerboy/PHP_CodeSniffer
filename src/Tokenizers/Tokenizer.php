@@ -580,7 +580,7 @@ abstract class Tokenizer
             'type'    => 'T_CLOSE_TAG',
             'content' => '',
         ];
-        $this->tokens = $tokens;
+        return $tokens;
 
     }//end tokenize()
 
