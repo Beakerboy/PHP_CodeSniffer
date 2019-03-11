@@ -362,11 +362,11 @@ abstract class Tokenizer
                                 break;
                             }
                         }//end if
-                        
+
                     }//end for
-                    
+
                 }//end if
-                
+
                 if ($matchedToken === false) {
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $lookAheadLength > 0) {
                         echo "\t\t* look ahead found nothing *".PHP_EOL;
@@ -388,7 +388,7 @@ abstract class Tokenizer
                     }
                     $cleanBuffer = true;
                 }//end if
-                
+
             } else if (isset($this->tokenValues[strtolower($char)]) === true) {
                 // No matter what token we end up using, we don't
                 // need the content in the buffer any more because we have
@@ -433,7 +433,7 @@ abstract class Tokenizer
                         break;
                     }
                 }//end for
-                
+
                 if ($matchedToken === false) {
                     $value    = $this->tokenValues[strtolower($char)];
                     $tokens[] = [
@@ -450,9 +450,9 @@ abstract class Tokenizer
                 } else {
                     $buffer = $char;
                 }//end if
-                
+
             }//end if
-            
+
             // Keep track of content inside comments.
             if ($inComment === ''
                 && array_key_exists($buffer, $this->commentTokens) === true
@@ -489,7 +489,7 @@ abstract class Tokenizer
                         echo "\t\t* looking for end of comment *".PHP_EOL;
                     }
                 }//end if
-                
+
             } else if ($inComment !== '') {
                 if ($this->commentTokens[$inComment] === null) {
                     // Comment ends at the next newline.
@@ -519,13 +519,13 @@ abstract class Tokenizer
                     $buffer = '';
                 }
             }//end if
-            
+
             if ($cleanBuffer === true) {
                 $buffer      = '';
                 $cleanBuffer = false;
             }
         }//end for
-        
+
         if (empty($buffer) === false) {
             if ($inString !== '') {
                 // The string did not end before the end of the file,
@@ -551,18 +551,18 @@ abstract class Tokenizer
                     echo "\t=> Added token T_WHITESPACE ($content)".PHP_EOL;
                 }
             }//end if
-            
+
         }//end if
-        
+
         $tokens[]     = [
             'code'    => T_CLOSE_TAG,
             'type'    => 'T_CLOSE_TAG',
             'content' => '',
         ];
         $this->tokens = $tokens;
-        
-    }//end tokenize
-    
+
+    }//end tokenize()
+
 
     /**
      * Performs additional processing after main tokenizing.
