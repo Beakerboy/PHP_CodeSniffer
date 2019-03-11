@@ -153,28 +153,30 @@ abstract class Tokenizer
         if (PHP_CODESNIFFER_VERBOSITY > 1) {
             echo "\t*** START JS TOKENIZING ***".PHP_EOL;
         }
+
         $maxTokenLength = 0;
         foreach ($this->tokenValues as $token => $values) {
             if (strlen($token) > $maxTokenLength) {
                 $maxTokenLength = strlen($token);
             }
         }
-        $tokens          = [];
-        $inString        = '';
-        $stringChar      = null;
-        $inComment       = '';
-        $buffer          = '';
-        $preStringBuffer = '';
-        $cleanBuffer     = false;
+
+        $tokens           = [];
+        $inString         = '';
+        $stringChar       = null;
+        $inComment        = '';
+        $buffer           = '';
+        $preStringBuffer  = '';
+        $cleanBuffer      = false;
         $commentTokenizer = new Comment();
-        $tokens[] = [
+        $tokens[]         = [
             'code'    => T_OPEN_TAG,
             'type'    => 'T_OPEN_TAG',
             'content' => '',
         ];
         // Convert newlines to single characters for ease of
         // processing. We will change them back later.
-        $string = str_replace($this->eolChar, "\n", $string);
+        $string   = str_replace($this->eolChar, "\n", $string);
         $chars    = str_split($string);
         $numChars = count($chars);
         for ($i = 0; $i < $numChars; $i++) {
@@ -185,12 +187,14 @@ abstract class Tokenizer
                 if ($inString !== '') {
                     echo "\t";
                 }
+
                 if ($inComment !== '') {
                     echo "\t";
                 }
+
                 echo "\tProcess char $i => $content (buffer: $bufferContent)".PHP_EOL;
             }//end if
-            
+
             if ($inString === '' && $inComment === '' && $buffer !== '') {
                 // If the buffer only has whitespace and we are about to
                 // add a character, store the whitespace first.
@@ -204,6 +208,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($buffer);
                         echo "\t=> Added token T_WHITESPACE ($content)".PHP_EOL;
                     }
+
                     $buffer = '';
                 }
 
