@@ -310,9 +310,8 @@ abstract class Tokenizer
                     $cleanBuffer = false;
                     continue;
                 }//end if
-                
             }//end if
-            
+
             // Check for known tokens, but ignore tokens found that are not at
             // the end of a string, like FOR and this.FORmat.
             if (isset($this->tokenValues[strtolower($buffer)]) === true
@@ -330,12 +329,13 @@ abstract class Tokenizer
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
                         echo "\t\t* buffer possibly contains token, looking ahead $lookAheadLength chars *".PHP_EOL;
                     }
+
                     $charBuffer = $buffer;
                     for ($x = 1; $x <= $lookAheadLength; $x++) {
                         if (isset($chars[($i + $x)]) === false) {
                             break;
                         }
-    
+
                         $charBuffer .= $chars[($i + $x)];
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
                             $content = Util\Common::prepareForOutput($charBuffer);
@@ -367,6 +367,7 @@ abstract class Tokenizer
                         }//end if
                     }//end for
                 }//end if
+
                 if ($matchedToken === false) {
                     if (PHP_CODESNIFFER_VERBOSITY > 1 && $lookAheadLength > 0) {
                         echo "\t\t* look ahead found nothing *".PHP_EOL;
@@ -388,7 +389,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($buffer);
                         echo "\t=> Added token $value ($content)".PHP_EOL;
                     }
-    
+
                     $cleanBuffer = true;
                 }//end if
             } else if (isset($this->tokenValues[strtolower($char)]) === true) {
@@ -421,13 +422,13 @@ abstract class Tokenizer
                     if (isset($chars[($i + $x)]) === false) {
                         break;
                     }
-    
+
                     $charBuffer .= $chars[($i + $x)];
                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
                         $content = Util\Common::prepareForOutput($charBuffer);
                         echo "\t\t=> Looking ahead $x chars => $content".PHP_EOL;
                     }
-    
+
                     if (isset($this->tokenValues[strtolower($charBuffer)]) === true) {
                         // We've found something larger that matches
                         // so we can ignore this char.
@@ -435,7 +436,7 @@ abstract class Tokenizer
                             $type = $this->tokenValues[strtolower($charBuffer)];
                             echo "\t\t* look ahead found more specific token ($type), ignoring $i *".PHP_EOL;
                         }
-    
+
                         $matchedToken = true;
                         break;
                     }
