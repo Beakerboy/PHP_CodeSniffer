@@ -575,7 +575,7 @@ abstract class Tokenizer
             }//end if
         }//end if
 
-        $tokens[]     = [
+        $tokens[] = [
             'code'    => T_CLOSE_TAG,
             'type'    => 'T_CLOSE_TAG',
             'content' => '',
