@@ -551,9 +551,7 @@ abstract class Tokenizer
                     echo "\t=> Added token T_WHITESPACE ($content)".PHP_EOL;
                 }
             }//end if
-
         }//end if
-
         $tokens[]     = [
             'code'    => T_CLOSE_TAG,
             'type'    => 'T_CLOSE_TAG',
