@@ -467,6 +467,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($lastContent);
                         echo "\t=> Removed token $value ($content)".PHP_EOL;
                     }
+    
                     $lastChars    = str_split($lastContent);
                     $lastNumChars = count($lastChars);
                     for ($x = 0; $x < $lastNumChars; $x++) {
@@ -489,7 +490,6 @@ abstract class Tokenizer
                         echo "\t\t* looking for end of comment *".PHP_EOL;
                     }
                 }//end if
-
             } else if ($inComment !== '') {
                 if ($this->commentTokens[$inComment] === null) {
                     // Comment ends at the next newline.
@@ -501,11 +501,13 @@ abstract class Tokenizer
                         $inComment = '';
                     }
                 }
+        
                 if (PHP_CODESNIFFER_VERBOSITY > 1) {
                     if ($inComment === '') {
                         echo "\t\t* found end of comment *".PHP_EOL;
                     }
                 }
+        
                 if ($inComment === '' && $cleanBuffer === false) {
                     $tokens[] = [
                         'code'    => T_STRING,
@@ -516,6 +518,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($buffer);
                         echo "\t=> Added token T_STRING ($content)".PHP_EOL;
                     }
+        
                     $buffer = '';
                 }
             }//end if
@@ -552,6 +555,7 @@ abstract class Tokenizer
                 }
             }//end if
         }//end if
+
         $tokens[]     = [
             'code'    => T_CLOSE_TAG,
             'type'    => 'T_CLOSE_TAG',
