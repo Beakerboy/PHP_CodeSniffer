@@ -206,6 +206,7 @@ abstract class Tokenizer
                     }
                     $buffer = '';
                 }
+
                 // If the buffer is not whitespace and we are about to
                 // add a whitespace character, store the content first.
                 if ($inString === ''
@@ -222,10 +223,11 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($buffer);
                         echo "\t=> Added token T_STRING ($content)".PHP_EOL;
                     }
+
                     $buffer = '';
                 }
             }//end if
-            
+
             // Process strings.
             if ($inComment === '' && isset($this->stringTokens[$char]) === true) {
                 if ($inString === $char) {
@@ -236,8 +238,10 @@ abstract class Tokenizer
                         if ($chars[$x] !== '\\') {
                             break;
                         }
+
                         $escapes++;
                     }
+
                     if ($escapes === 0 || ($escapes % 2) === 0) {
                         // There is an even number escape chars,
                         // so this is not escaped, it is the end of the string.
@@ -251,6 +255,7 @@ abstract class Tokenizer
                             $content = Util\Common::prepareForOutput($buffer.$char);
                             echo "\t=> Added token T_CONSTANT_ENCAPSED_STRING ($content)".PHP_EOL;
                         }
+
                         $buffer          = '';
                         $preStringBuffer = '';
                         $inString        = '';
@@ -265,9 +270,8 @@ abstract class Tokenizer
                         echo "\t\t* looking for string closer *".PHP_EOL;
                     }
                 }//end if
-                
             }//end if
-            
+
             if ($inString !== '' && $char === "\n") {
                 // Unless this newline character is escaped, the string did not
                 // end before the end of the line, which means it probably
@@ -284,6 +288,7 @@ abstract class Tokenizer
                     }
                 }
             }
+
             $buffer .= $char;
             // We don't look for special tokens inside strings,
             // so if we are in a string, we can continue here now
@@ -291,6 +296,7 @@ abstract class Tokenizer
             if ($inString !== '') {
                 continue;
             }
+
             // Special case for T_DIVIDE which can actually be
             // the start of a regular expression.
             if ($buffer === $char && $char === '/' && $chars[($i + 1)] !== '*') {
@@ -305,6 +311,7 @@ abstract class Tokenizer
                         $content = Util\Common::prepareForOutput($regex['content']);
                         echo "\t=> Added token T_REGULAR_EXPRESSION ($content)".PHP_EOL;
                     }
+
                     $i           = $regex['end'];
                     $buffer      = '';
                     $cleanBuffer = false;
